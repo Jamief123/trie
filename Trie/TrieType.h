@@ -54,6 +54,30 @@ EntryType * TrieType::TrieSearch(Key target)
 	return current->ref;
 }
 
+bool TrieType::DeleteTrie(Key delkey)
+{
+	int i;
+	Trienode* current = root;
+	for (i = 0; i < MAXLENGTH && current; i++)
+		if (delkey[i] == '\0')
+			break;
+		else
+			current = current->branch[delkey[i] - 'a'];
+	if (!current)
+		return false;
+	else
+		if (!current->ref)
+			return false;
+
+	current->ref = NULL;
+
+	//for all branches
+		//if all branches are null
+			//delete node 
+		//recur up until another word found, deleting nodes as you go up
+	return true;
+}
+
 Trienode *CreateNode()
 {
 	int ch;
